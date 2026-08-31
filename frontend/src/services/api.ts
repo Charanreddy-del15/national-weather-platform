@@ -111,3 +111,21 @@ export const authService = {
 };
 
 export default api;
+export const fetchKPISummary = async () => {
+  try {
+    const res = await api.get('/stats');
+    return res.data;
+  } catch (error) {
+    console.error('Failed to fetch KPI summary:', error);
+    return null;
+  }
+};
+
+export const fetchWeatherEvents = async (filters: any = {}) => {
+  return await eventService.getEvents(filters);
+};
+
+export const verifyEvent = async (id: string, status: string) => {
+  const res = await api.post(`/events/${id}/verify`, { status });
+  return res.data;
+};
